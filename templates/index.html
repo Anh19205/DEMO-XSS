@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% autoescape false %} <!-- khi autoescape để bằng true thì nó có cơ chế chống XSS -->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>XSS Demo</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+
+  <body>
+
+    <!-- Header -->
+    <header>
+      <h1>XSS Demo</h1>
+      <p>Read, search and post comments</p>
+    </header>
+
+    <!-- Search form -->
+    <form method="GET">
+      <input type="text" name="q" 
+             placeholder="Search query" autocomplete="off" />
+      <input type="submit" value="Filter comments" />
+    </form>
+
+    <!-- Comments -->
+    {% if not search_query %}
+      <h3>Showing all comments:</h3>
+    {% else %}
+      <h3>Showing comments containing "{{ search_query }}":</h3>
+    {% endif %}
+
+    {% for comment in comments %}
+    <div>
+        <p>{{ comment }}</p>
+      </div> 
+<!--      <div title={{ comment }}>   -->   <!--XSS trong HTML Attribute Context  "tooltip onmouseover=alert(1)" khi nhập câu lệnh này vào ô comment thì nó sẽ báo lỗi và cứ mỗi khi di chuột vào ô comment thì nó sẽ hiển thị ô báo lỗi -->>
+    {% endfor %}
+
+    <!-- Write form -->
+    <form action="/" method="POST">
+      <input type="text" name="comment" 
+             placeholder="Comment" autocomplete="off" />
+      <input type="submit" value="Submit new comment" />
+    </form>
+
+  </body>
+</html>
+{% endautoescape %}
