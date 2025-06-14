@@ -19,7 +19,8 @@ the page. If you want to clear the database, just delete the `database.db` file 
 # Making it vulnerable
 
 To demonstrate XSS flaws you can change 
-[`templates/index.html` line 2](https://github.com/bgres/xss-demo/blob/master/templates/index.html#L2)
+[`templates/index.html` line 2](https://github.com/Anh19205/DEMO-XSS/blob/master/templates/index.html#L2
+)
 ```jinja2
 {% autoescape false %}
 ```
@@ -27,7 +28,7 @@ And then try `<script>alert('javascript was executed')</script>` as inputs both 
 the write comment input (stored XSS).
 
 To demonstrate that context-aware filtering is important, you can change 
-[line 33 in `index.html`](https://github.com/bgres/xss-demo/blob/master/templates/index.html#L33) to
+[line 33 in `index.html`](https://github.com/Anh19205/DEMO-XSS/blob/master/templates/index.html#L33) to
 ```html
       <div title={{ comment }}>
 ```
@@ -46,7 +47,7 @@ for variables in your templates.
 
 
 The tooltip attack mentioned above can of course be avoided by using quotes correctly on 
-[line 33 ](https://github.com/bgres/xss-demo/blob/master/templates/index.html#L33):
+[line 33 ](https://github.com/Anh19205/DEMO-XSS/blob/master/templates/index.html#L33):
 ```html
       <div title="{{ comment }}">
 ```
@@ -55,7 +56,7 @@ The tooltip attack mentioned above can of course be avoided by using quotes corr
 You can also test using 
 [Content Security Policy headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) to 
 disallow unsafe inline javascript by replacing 
-[`app.py` line 16-18](https://github.com/bgres/xss-demo/blob/master/app.py#L16-L18) with:
+[`app.py` line 16-18](https://github.com/Anh19205/DEMO-XSS/blob/master/app.py#L16-L18) with:
 
 ```python
     from flask import make_response
